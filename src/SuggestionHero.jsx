@@ -22,7 +22,7 @@ const SuggestionHero = () => {
           const data = await response.json();
 
           if(data.results){
-            setMovie(data.results.splice(0,5));
+            setMovie(data.results.splice(0,6));
           }
           else{
             setErrorMessage('Unable to load movies')
@@ -42,11 +42,13 @@ const SuggestionHero = () => {
     <section className='absolute bottom-[4rem] left-[2rem] w-full px-[20rem] text-white'>
       <h2 className='text-xl font-bold mb-5 px-36'>{movie.length ?'Trending Movies':null}</h2>
       {errorMessage&&<p>{errorMessage}</p>}
-      <div className='display flex gap-4 justify-center'>
-        {movie.map((value,index)=>(
-             <MovieCards key={index} movie={value}/>
-        ))} 
-      </div>
+
+     <div className="flex gap-2 justify-center overflow-hidden"> 
+       {movie.map((value, index) => (
+      <MovieCards key={index} movie={value} />
+          ))}     
+     </div>
+
     </section>
   )
 }
