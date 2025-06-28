@@ -1,9 +1,6 @@
-import React from 'react'
-
 const endpoint = "https://image.tmdb.org/t/p/original/"
 
 const MovieCards = ({movie}) => {
-  console.log(movie)
   let imgEndpoint = `${endpoint}${movie.poster_path}`;
   return (
     <div className='flex min-w-[200px] px-2'> 

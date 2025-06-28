@@ -1,8 +1,12 @@
-import React from 'react'
+import MovieCards from './MovieCards'
 
-const Carousel = () => {
+const Carousel = ({movie}) => {
   return (
-    <div>Carousel</div>
+     <div className="flex gap-1 justify-center"> 
+       {movie.map((value, index) => (
+      <MovieCards key={index} movie={value} />
+          ))}     
+     </div>
   )
 }
 
