@@ -1,16 +1,17 @@
 import React from 'react'
-import ArtBackground from './ArtBackground'
-import NavBar from './NavBar'
-import HeroText from './HeroText'
-import SuggestionHero from './SuggestionHero'
+import {Route,Routes} from 'react-router-dom';
+import Home from './Home'
+import RouteLayout from './RouteLayout';
+import NotFound from './NotFound';
 
 const App = () => {
   return (  
-        <ArtBackground>
-           <NavBar/>
-           <HeroText/>
-           <SuggestionHero/>
-        </ArtBackground>
+        <Routes>
+            <Route element={<RouteLayout/>}> 
+                <Route path="*" element={<NotFound/>}/>
+                <Route path="/" element={<Home/>}/>
+            </Route>
+        </Routes>
   )
 }
 
