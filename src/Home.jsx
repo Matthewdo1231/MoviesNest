@@ -1,8 +1,7 @@
 import React from 'react'
-import ArtBackground from './ArtBackground'
-import NavBar from './NavBar'
 import HeroText from './HeroText'
 import SuggestionHero from './SuggestionHero'
+import GenresTags from './GenresTags'
 
 
 const Home = () => {
