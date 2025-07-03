@@ -1,12 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
+const GenresTags = ({tag,currhovered,setCurrHovered}) => {
 
-const GenresTags = ({tag}) => {
- const curretTag = tag === 'genres' ? genres :countries;
+const curretTag = tag === 'genres' ? genres :countries;
+ 
+const isVisible = tag === currhovered;
+
+const baseStyle = 'absolute w-[40rem] top-13 grid grid-rows-11 grid-flow-col gap-2 p-4 text-white bg-black outline-2 outline-amber-600 transition-opacity duration-300 ease-out';
+const visibilityStyle = isVisible ? 'opacity-100' : 'opacity-0 invisible';
+
+const style = `${baseStyle} ${visibilityStyle}`;
+ 
   return (
-  <ul className="absolute w-[40rem] top-13 hidden group-hover:grid grid-rows-11 grid-flow-col gap-2 p-4 text-white bg-black outline-2 outline-amber-600">
+  <ul className={`${style} `}>
      {curretTag.categories.map((item,index)=>(
-        <li className='hover:bg-amber-600 p-1' key={index}>{item}</li>
+        <li onClick={()=>setCurrHovered('leave')} className='hover:bg-amber-600' key={index}>
+             <Link className='p-1' to={`/${tag}/${encodeURIComponent(item)}`}>{item}</Link>
+          </li>
      ))}
   </ul>
   )
