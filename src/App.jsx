@@ -12,8 +12,10 @@ const App = () => {
             <Route element={<RouteLayout/>}> 
                 <Route index element={<Navigate to="/home" replace/>}/>
                 <Route path="/home" element={<Home/>}/>
-                <Route path="/genres/:genre" element={<FilteredPage/>}/>
-                <Route path="/countries/:country" element={<FilteredPage/>}/>
+                <Route path="/genres/:genre" element={<FilteredPage routeSegment={'genres'}/>}/>
+                <Route path="/countries/:country" element={<FilteredPage routeSegment={'countries'}/>}/>
+                <Route path="/movies" element={<FilteredPage routeSegment={'movies'}/>}/>
+                <Route path="/series" element={<FilteredPage routeSegment={'series'}/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Route>
         </Routes>

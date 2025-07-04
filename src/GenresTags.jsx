@@ -16,7 +16,7 @@ const style = `${baseStyle} ${visibilityStyle}`;
   <ul className={`${style} `}>
      {curretTag.categories.map((item,index)=>(
         <li onClick={()=>setCurrHovered('leave')} className='hover:bg-amber-600' key={index}>
-             <Link className='p-1' to={`/${tag}/${encodeURIComponent(item)}`}>{item}</Link>
+             <Link className='block w-full h-full p-1' to={`/${tag}/${encodeURIComponent(item)}`}>{item}</Link>
           </li>
      ))}
   </ul>
@@ -27,49 +27,27 @@ export default GenresTags
 
 const genres = {
   categories: [
-    "Action",
-    "Action & Adventure",
-    "Adventure",
-    "Animation",
-    "Biography",
-    "Comedy",
-    "Costume",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "Film-Noir",
-    "Game-Show",
-    "History",
-    "Horror",
-    "Jen Statsky",
-    "Kungfu",
-    "Music",
-    "Musical",
-    "Mystery",
-    "Mythological",
-    "News",
-    "Psychological",
-    "Reality",
-    "Reality-TV",
-    "Romance",
-    "Sci-Fi",
-    "Sci-Fi & Fantasy",
-    "Science Fiction",
-    "Short",
-    "Sitcom",
-    "Sport",
-    "Talk-Show",
-    "Thriller",
-    "TV Movie",
-    "TV Show",
-    "Vito Glazers",
-    "War",
-    "Western"
+  "Action",
+  "Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Family",
+  "Fantasy",
+  "History",
+  "Horror",
+  "Music",
+  "Mystery",
+  "Romance",
+  "Science Fiction",
+  "TV Movie",
+  "Thriller",
+  "War",
+  "Western"
   ]
 };
-
 
 const countries = {
     categories: [
