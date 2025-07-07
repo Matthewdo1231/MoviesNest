@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import MovieCards from './MovieCards';
 import { useParams } from 'react-router-dom';
 import { getTmdbValue } from './filterID';
+import MovieGrid from './MovieGrid';
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -50,17 +50,8 @@ const FilteredPage = ({routeSegment}) => {
   fetchMovies();
 }, [segment, queryID]);
 
- 
-
   return (
-   <div className='absolute top-40 w-full px-[20rem]'>
-    <h1 className='text-white text-2xl mb-2'>{`RESULTS OF ${segment.toUpperCase()} : ${id || '' }`}</h1>
-    <div className='w-full grid place-items-center grid-cols-6 gap-1'> 
-       {movies.map((movie,index)=>(
-          <MovieCards key={index} movie={movie}/>
-       ))}
-    </div>
-    </div> 
+   <MovieGrid movies={movies} segment={segment} id={id}/>
   )
 }
 

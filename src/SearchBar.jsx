@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useDebounce from './useDebounce';
 import { mergeSearchResult } from './mergSearchResult';
+import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { SearchContext } from './RouteLayout';
+import { useContext } from 'react';
 
 const API_BASE_MOVIE_URL = 'https://api.themoviedb.org/3/search/movie?language=en-US&query=';
 const API_BASE_TV_SERIES_URL = 'https://api.themoviedb.org/3/search/tv?language=en-US&query='; 
@@ -19,12 +23,25 @@ const imgEndpoint = "https://image.tmdb.org/t/p/original/"
 
 
 const SearchBar = () => {
-   const [value, setValue] = useState("");
+   const navigate = useNavigate(); 
+   const [searchParams] = useSearchParams(); 
+   const query = searchParams.get('q') || '';
+   const [value, setValue] = useState(query);
    const debouncedInput = useDebounce(value);
    const [tvSeriesResult, setTvSeriesResult] = useState([]);
    const [moviesResult, setMoviesResult] = useState([]);
    const [mergeMovies, setMergeMovies] = useState([]);
    const [errorMessage,setErrorMessage] = useState();
+   const [isFocused,setIsFocused] = useState(false);
+   const { searchMovies, setSearchMovies } = useContext(SearchContext);
+
+   const handleEnterKey = (event) =>{
+          if(isFocused && event.key === 'Enter'){
+            fetchSearchMovies(event.target.value.trim());
+            fetchSearchTVseries(event.target.value.trim());
+            setTimeout(()=>{navigate(`/search?q=${encodeURIComponent(value)}`)},500)
+          }
+   }
 
    async function fetchMovies(){
        try{
@@ -65,16 +82,70 @@ const SearchBar = () => {
 
    } 
 
+   async function fetchSearchMovies(value){
+       try{
+        const endpoint = `${API_BASE_MOVIE_URL}${value}`
+        const response = await fetch(endpoint,API_OPTIONS);
+        const data = await response.json();
 
-  useEffect(()=>{
-    fetchMovies()
+        if(data.results){
+          setMoviesResult(data.results.splice(0,10));
+        }else{
+          setErrorMessage('Unable to load movies');
+        }
+
+       
+      }catch(e){
+        console.log(`Error fetching result,${e}`)
+        setErrorMessage('Unable to fetch movies')
+      }
+
+   }
+   async function fetchSearchTVseries(value){
+       try{
+        const endpoint = `${API_BASE_TV_SERIES_URL}${value}`
+        const response = await fetch(endpoint,API_OPTIONS);
+        const data = await response.json();
+
+        if(data.results){
+          setTvSeriesResult(data.results.splice(0,10));
+        }else{
+          setErrorMessage('Unable to load movies');
+        }
+
+       
+      }catch(e){
+        console.log(`Error fetching result,${e}`)
+        setErrorMessage('Unable to fetch movies')
+      }
+
+   }  
+
+
+ useEffect(()=>{
+    fetchMovies() 
     fetchTVseries()
     },[debouncedInput])
 
  useEffect(()=>{
       const merged = mergeSearchResult(tvSeriesResult,moviesResult)
       setMergeMovies(merged);
+      setSearchMovies(merged);
     },[moviesResult,tvSeriesResult])
+
+  useEffect(()=>{
+      localStorage.setItem('mergeMovies',JSON.stringify(searchMovies))
+    },[searchMovies])
+
+  useEffect(() => {
+  if (query.trim() !== "") {
+    setValue(query);
+    fetchSearchMovies(query);
+    fetchSearchTVseries(query);
+  }
+}, [query]);  
+
+  
 
   return (
   <div className='relative h-[3rem] w-[30rem]'>
@@ -83,6 +154,8 @@ const SearchBar = () => {
       <input
         type="text"
         value={value}
+        onFocus={() => setIsFocused(true)}
+        onKeyDown={handleEnterKey}
         onChange={(e) => setValue(e.target.value)}
         className="border-2 pl-10 w-[100%] text-white border-orange-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="Search for Movies or Series"
