@@ -30,16 +30,18 @@ const SearchBar = () => {
    const debouncedInput = useDebounce(value);
    const [tvSeriesResult, setTvSeriesResult] = useState([]);
    const [moviesResult, setMoviesResult] = useState([]);
-   const [mergeMovies, setMergeMovies] = useState([]);
    const [errorMessage,setErrorMessage] = useState();
    const [isFocused,setIsFocused] = useState(false);
-   const { searchMovies, setSearchMovies } = useContext(SearchContext);
+   const {searchMovies, setSearchMovies } = useContext(SearchContext);
+   const {mergeMovies, setMergeMovies } = useContext(SearchContext);
 
    const handleEnterKey = (event) =>{
           if(isFocused && event.key === 'Enter'){
             fetchSearchMovies(event.target.value.trim());
             fetchSearchTVseries(event.target.value.trim());
-            setTimeout(()=>{navigate(`/search?q=${encodeURIComponent(value)}`)},500)
+            setTimeout(()=>{
+              navigate(`/search?q=${encodeURIComponent(value)}`) 
+            },500);
           }
    }
 
@@ -133,10 +135,6 @@ const SearchBar = () => {
       setSearchMovies(merged);
     },[moviesResult,tvSeriesResult])
 
-  useEffect(()=>{
-      localStorage.setItem('mergeMovies',JSON.stringify(searchMovies))
-    },[searchMovies])
-
   useEffect(() => {
   if (query.trim() !== "") {
     setValue(query);
@@ -144,6 +142,7 @@ const SearchBar = () => {
     fetchSearchTVseries(query);
   }
 }, [query]);  
+
 
   
 
@@ -159,6 +158,7 @@ const SearchBar = () => {
         onChange={(e) => setValue(e.target.value)}
         className="border-2 pl-10 w-[100%] text-white border-orange-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="Search for Movies or Series"
+        spellCheck="false"
       />
       </div>
       <div className='w-full flex flex-col'>

@@ -6,6 +6,7 @@ import NotFound from './NotFound';
 import { Navigate } from 'react-router-dom';
 import FilteredPage from './FilteredPage';
 import SearchPage from './SearchPage';
+import WatchPage from './WatchPage';
 
 const App = () => {
   return (  
@@ -14,6 +15,8 @@ const App = () => {
                 <Route index element={<Navigate to="/home" replace/>}/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/search" element={<SearchPage/>}/>
+                <Route path="/watch/:id" element={<WatchPage/>}/>
+                <Route path="/watch/tv/:id/:season/:episode" element={<WatchPage/>}/>
                 <Route path="/genres/:genre" element={<FilteredPage routeSegment={'genres'}/>}/>
                 <Route path="/countries/:country" element={<FilteredPage routeSegment={'countries'}/>}/>
                 <Route path="/movies" element={<FilteredPage routeSegment={'movies'}/>}/>

@@ -24,6 +24,8 @@ const FilteredPage = ({routeSegment}) => {
   const id = params[segment];
   const queryID = getTmdbValue(segment,id);
 
+  console.log(movies)
+
   const fetchMovies= async()=>{
      try{
        const endpoint = segment === 'genre' ? `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&with_genres=${queryID}'`

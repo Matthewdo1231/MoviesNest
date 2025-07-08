@@ -5,14 +5,16 @@ import React, { createContext, useState } from 'react';
 export const SearchContext = createContext();
 
 const RouteLayout = () => {
+
    const [searchMovies, setSearchMovies] = useState([]);
+   const [mergeMovies, setMergeMovies] = useState([]);
   return (  
-  <SearchContext.Provider value={{ searchMovies, setSearchMovies }}> 
+  <SearchContext.Provider value={{ searchMovies, setSearchMovies,mergeMovies,setMergeMovies }}> 
      <ArtBackground>
         <NavBar/>
         <Outlet/>
      </ArtBackground>
-      </SearchContext.Provider> 
+   </SearchContext.Provider> 
   )
 }
 
