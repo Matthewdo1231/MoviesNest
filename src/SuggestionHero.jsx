@@ -91,8 +91,8 @@ const moveLeft = () => {
       />
     </section>
 
-    <section className='lg:hidden absolute top-[40rem] left-[4rem] md:left-[2rem] mt-6'>
-      <div className='w-full grid place-items-center grid-cols-2 md:grid-cols-3 gap-16'>
+    <section className='lg:hidden absolute top-[50rem] left-[2rem] md:left-[2rem] mt-6'>
+      <div className='w-full grid place-items-center grid-cols-2 md:grid-cols-3 sm:gap-16'>
         {movie.map((item,index)=>(
           <MovieCards key={index} movie={item}/>
        ))}

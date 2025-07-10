@@ -156,7 +156,7 @@ const SearchBar = () => {
         onFocus={() => setIsFocused(true)}
         onKeyDown={handleEnterKey}
         onChange={(e) => setValue(e.target.value)}
-        className="border-2 pl-10 w-[100%] text-white border-orange-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+        className="border-2 pl-10 w-[90%] md:w-[100%] text-white border-orange-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="Search for Movies or Series"
         spellCheck="false"
       />
