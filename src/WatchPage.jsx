@@ -15,7 +15,7 @@ const srcLink = season == undefined ? `https://vidsrc.xyz/embed/movie?tmdb=${id}
     ></iframe>
     <></>
   </div>
-
+   
   )
 }
 

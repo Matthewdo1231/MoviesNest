@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Carousel from './Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import MovieCards from './MovieCards';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -59,7 +60,8 @@ const moveLeft = () => {
   }, [movie]);
 
   return (
-    <section className="absolute bottom-[4rem] w-full px-[10rem] text-white">
+    <>
+    <section className="hidden lg:block absolute bottom-[4rem] w-full px-[10rem] text-white">
       <h2 className="text-xl font-bold mb-5">{movie.length ? 'Trending Movies' : null}</h2>
       {errorMessage && <p>{errorMessage}</p>}
 
@@ -88,6 +90,16 @@ const moveLeft = () => {
         icon={faChevronRight}
       />
     </section>
+
+    <section className='lg:hidden absolute top-[40rem] left-[4rem] md:left-[2rem] mt-6'>
+      <div className='w-full grid place-items-center grid-cols-2 md:grid-cols-3 gap-16'>
+        {movie.map((item,index)=>(
+          <MovieCards key={index} movie={item}/>
+       ))}
+      </div>
+ 
+    </section>
+    </>
   );
 };
 

@@ -147,7 +147,7 @@ const SearchBar = () => {
   
 
   return (
-  <div className='relative h-[3rem] w-[30rem]'>
+  <div className='relative h-[3rem] w-[35rem]'>
     <div className='w-full'> 
     <FontAwesomeIcon className='text-orange-400 absolute top-3 left-3 text-[1.2rem]' icon={faMagnifyingGlass}/>
       <input

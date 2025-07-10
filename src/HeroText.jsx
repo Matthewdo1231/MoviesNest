@@ -3,7 +3,7 @@ import React from 'react'
 const HeroText = () => {
   return (
   
-    <div className='absolute top-50 w-full h-[10rem] px-[35rem] text-center text-white'> 
+    <div className='absolute top-50 w-full h-[10rem] px-[5rem] lg:px-[35rem] text-center text-white'> 
         <h1 className="text-5xl font-bold mb-[2rem]">  
           MovieNest
         </h1>
