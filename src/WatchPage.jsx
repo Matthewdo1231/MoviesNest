@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import SeasonList from '../../SeasonList';
+import SeasonList from './SeasonList';
 import EpisodesList from './EpisodesList';
 
 const API_BASE_MOVIE_URL = "https://api.themoviedb.org/3/tv/";
