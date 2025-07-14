@@ -50,6 +50,8 @@ const WatchPage = () => {
     console.log(seasonData);
   }, [seasonData]);
 
+  
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -71,7 +73,7 @@ const WatchPage = () => {
           <div className='w-[80%] h-full flex flex-col'>
             <div className='w-full h-1/2'>
               <h1 className='text-3xl font-bold text-white'>
-                {seasonData.original_name}
+                {seasonData.original_name} - Season{currentSeason} - Episode{currentEpisode}
               </h1>
               <h2 className='text-lg text-white italic mt-4'>
                 {seasonData.overview.length <= 400
@@ -83,21 +85,24 @@ const WatchPage = () => {
             <div className='w-full h-1/2 flex items-baseline gap-10 text-white'>
               {season == null ? null : (
                 <>
-                  <button
+                <div className='relative'>
+                 <button
                     onClick={() => setIsClicked(() => 'Season')}
-                    className='relative py-2 px-24 border-amber-500 focus:outline-none focus:border-amber-600 border-2 rounded-2xl'
+                    className='py-2 px-24 border-amber-500 focus:outline-none focus:border-amber-600 border-2 rounded-2xl'
                   >
                     {`Season ${currentSeason}`}
                     <FontAwesomeIcon
                       className="absolute right-4 bottom-3 text-white"
                       icon={faChevronDown}
                     />
-                    {isClicked === 'Season' && (
-                      <SeasonList seasonslength={seasonData.number_of_seasons} />
-                    )}
                   </button>
-
-                  <button
+                   {isClicked === 'Season' && (
+                      <SeasonList seasonslength={seasonData.number_of_seasons} id={id} currentEpisode={currentEpisode} setCurrentSeason={setCurrentSeason} setIsClicked={setIsClicked}/>
+                    )}
+                </div>
+              
+                <div className='relative'>
+                   <button
                     onClick={() => setIsClicked(() => 'Episode')}
                     className='relative py-2 px-24 border-amber-500 focus:outline-none focus:border-amber-600 border-2 rounded-2xl'
                   >
@@ -106,10 +111,16 @@ const WatchPage = () => {
                       className="absolute right-4 bottom-3 text-white"
                       icon={faChevronDown}
                     />
-                    {isClicked === 'Episode' && (
-                      <EpisodesList episodeslength={seasonData.seasons[currentSeason].episode_count} />
-                    )}
                   </button>
+                   {isClicked === 'Episode' && (
+                      <EpisodesList 
+                      id={id}
+                      setIsClicked={setIsClicked}
+                      currentSeason={currentSeason} currentEpisode={currentEpisode} setCurrentEpisode={setCurrentEpisode}
+                      episodeslength={seasonData?.seasons[currentSeason]?.episode_count || seasonData?.number_of_episodes} />
+                    )}
+                </div>
+              
                 </>
               )}
             </div>
