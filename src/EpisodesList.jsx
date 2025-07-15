@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const EpisodesList = ({episodeslength ,id, setCurrentEpisode, currentSeason, setIsClicked, currentEpisode}) => {
+ console.log(episodeslength)
 const navigate = useNavigate();
 const episodes = [];
   for(let i=1; i <= episodeslength ; i++){

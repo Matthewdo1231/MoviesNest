@@ -112,12 +112,14 @@ const WatchPage = () => {
                       icon={faChevronDown}
                     />
                   </button>
-                   {isClicked === 'Episode' && (
+                   {isClicked === 'Episode' && (  
                       <EpisodesList 
                       id={id}
                       setIsClicked={setIsClicked}
                       currentSeason={currentSeason} currentEpisode={currentEpisode} setCurrentEpisode={setCurrentEpisode}
-                      episodeslength={seasonData?.seasons[currentSeason]?.episode_count || seasonData?.number_of_episodes} />
+                      episodeslength={seasonData.seasons[0].name == "Specials"
+                      ? seasonData.seasons[currentSeason].episode_count
+                      : seasonData.seasons[(parseInt(currentSeason) - 1).toString()].episode_count } />
                     )}
                 </div>
               
